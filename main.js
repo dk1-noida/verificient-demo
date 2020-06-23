@@ -33,7 +33,7 @@ const createWindow= ()=>{
 	usbDetect.startMonitoring();
 	mainWindow.ELECTRON_DISABLE_SECURITY_WARNINGS;
 
-//	mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 
 // Protect screen from capturing
 	mainWindow.setContentProtection(true);

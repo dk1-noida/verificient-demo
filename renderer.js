@@ -6,6 +6,8 @@ const { desktopCapturer } = electron;
 const { screen, dialog } = electron.remote;
 const fs= require('fs');
 const path= require('path');
+const calculate= require('./napis/calculate-napi');
+const childProcess= require('child_process');
 
 const Storage = new Store({  
   configName: 'screenshots-info',
@@ -29,6 +31,42 @@ document.getElementById('root').innerHTML= output;
 
 
 const screenShot= document.getElementById('screen-shot');
+const sumButton= document.getElementById('n-api-sum');
+const subButton= document.getElementById('n-api-sub');
+const multButton= document.getElementById('n-api-mult');
+const divButton= document.getElementById('n-api-div');
+const firstInput= document.getElementById('first');
+const secondinput= document.getElementById('second');
+const nAPIResult= document.getElementById('n-api-result');
+const btnFaceDetect= document.getElementById('btn-face-detect');
+
+btnFaceDetect.addEventListener('click', ()=>{
+	sendToPython();
+});
+
+sumButton.addEventListener('click', ()=>{
+	let value1= parseInt(firstInput.value);
+	let value2= parseInt(firstInput.value);
+	nAPIResult.innerHTML= calculate.sum(value1, value2);
+});
+
+subButton.addEventListener('click', ()=>{
+	let value1= firstInput.value;
+	let value2= firstInput.value;
+	nAPIResult.innerHTML= calculate.subtract(value1, value2);
+});
+
+multButton.addEventListener('click', ()=>{
+	let value1= firstInput.value;
+	let value2= firstInput.value;
+	nAPIResult.innerHTML= calculate.multiply(value1, value2);
+});
+
+divButton.addEventListener('click', ()=>{
+	let value1= firstInput.value;
+	let value2= firstInput.value;
+	nAPIResult.innerHTML= calculate.division(value1, value2);
+})
 
 drivelist.list()
 .then((drives)=>{
@@ -73,4 +111,21 @@ function determinThumbnail() {
 		width: maxDimension * window.devicePixelRatio,
 		height: maxDimension * window.devicePixelRatio
 	}
+}
+
+function sendToPython() {
+  var python = childProcess.spawn('python', ['./py/identify_face_image.py']);
+  python.stdout.on('data', function (data) {
+    console.log("Python response: ", data.toString('utf8'));
+    //result.textContent = data.toString('utf8');
+  });
+
+  python.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });  
+
+  python.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+  });
+
 }

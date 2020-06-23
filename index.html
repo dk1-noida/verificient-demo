@@ -8,9 +8,40 @@
 <body>
 	<div class="container">
 		<br/>		
-		<div id="root"></div>	
+		<div id="root"></div>		
+	</div>
+	<div class="container justify-content-md-center">
+		<br/>
 		<div><button id="screen-shot" class="btn btn-primary">screen shorts</button></div>
-	</div>	
+		<br/>
+		<div class="container row">
+			<dir class="col-6">First Value:-
+			<input type="text" name="first" id="first" value="">
+		</dir>
+			<dir class="col-6">Second Value:-
+			<input type="text" name="second" id="second" value="">
+		</dir>
+		</div>		
+		<div class="container row">
+			<div class="col-2">Result:-</div>
+			<div class="col-3" id="n-api-result"></div>
+		</div>
+		<br/>
+		<div class="container row">
+			<button id="n-api-sum" class="btn btn-primary col-1">+</button>
+			<div class="col-1"></div>
+			<button id="n-api-sub" class="btn btn-primary col-1">-</button>
+			<div class="col-1"></div>
+			<button id="n-api-mult" class="btn btn-primary col-1">x</button>
+			<div class="col-1"></div>
+			<button id="n-api-div" class="btn btn-primary col-1">/</button>
+		</div>
+		<br>
+		<div class="container row">
+			<button id="btn-face-detect" class="btn btn-primary col-3">detect face</button>
+		</div>
+		<br/><br/><br/>
+	</div>
 </body>
 <script>
 		require('./renderer.js');		
